@@ -1,0 +1,286 @@
+openapi: 3.0.3
+info:
+  title: Smart Airport Ride Pooling API
+  version: 1.0.0
+  description: |
+    Production-grade backend for intelligent airport ride pooling.
+    Pools passengers into shared cabs with route optimization,
+    detour limits, luggage capacity, concurrency safety, and dynamic pricing.
+  contact:
+    name: Airport Ride Pooling Team
+
+servers:
+  - url: http://localhost:3000
+    description: Local development
+
+tags:
+  - name: Ride
+    description: Ride request and pool management
+  - name: Vehicle
+    description: Vehicle availability
+  - name: Pricing
+    description: Fare estimation and calculation
+  - name: System
+    description: Health checks and monitoring
+
+paths:
+  /ride/request:
+    post:
+      tags: [Ride]
+      summary: Create a ride request
+      description: Creates a new ride request and enqueues it for async pool matching via BullMQ.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [passengerId, destLat, destLng, destAddress]
+              properties:
+                passengerId:
+                  type: string
+                  format: uuid
+                  description: UUID of the passenger
+                destLat:
+                  type: number
+                  format: float
+                  example: 13.0827
+                  description: Destination latitude
+                destLng:
+                  type: number
+                  format: float
+                  example: 80.2707
+                  description: Destination longitude
+                destAddress:
+                  type: string
+                  example: "T. Nagar, Chennai"
+                  description: Human-readable destination
+                luggageCount:
+                  type: integer
+                  default: 1
+                  minimum: 0
+                  maximum: 10
+                maxDetourRatio:
+                  type: number
+                  format: float
+                  default: 1.4
+                  minimum: 1.0
+                  maximum: 3.0
+                  description: Max acceptable detour ratio (1.4 = 40% extra distance)
+      responses:
+        '201':
+          description: Ride request created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  rideRequestId:
+                    type: string
+                    format: uuid
+                  jobId:
+                    type: string
+                  status:
+                    type: string
+                    enum: [PENDING]
+        '400':
+          description: Validation error
+        '404':
+          description: Passenger not found
+        '429':
+          description: Rate limited
+
+  /ride/cancel:
+    post:
+      tags: [Ride]
+      summary: Cancel a ride request
+      description: Cancels a matched or pending ride request and rebalances the pool.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [rideRequestId]
+              properties:
+                rideRequestId:
+                  type: string
+                  format: uuid
+      responses:
+        '200':
+          description: Ride cancelled
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  cancelled:
+                    type: boolean
+                  poolRebalanced:
+                    type: boolean
+                  poolDisbanded:
+                    type: boolean
+        '404':
+          description: Ride request not found
+        '409':
+          description: Cannot cancel (already completed)
+
+  /ride/pool/{id}:
+    get:
+      tags: [Ride]
+      summary: Get pool details
+      description: Returns full pool info including vehicle, passengers, and route.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Pool details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pool:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      status:
+                        type: string
+                        enum: [OPEN, FULL, IN_TRANSIT, COMPLETED, CANCELLED]
+                      routeCostKm:
+                        type: number
+                      currentPassengers:
+                        type: integer
+                      vehicle:
+                        type: object
+                      passengers:
+                        type: array
+                        items:
+                          type: object
+        '404':
+          description: Pool not found
+
+  /ride/status/{id}:
+    get:
+      tags: [Ride]
+      summary: Check ride status
+      description: Poll this endpoint after creating a ride request to check matching status.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Ride status
+        '404':
+          description: Not found
+
+  /vehicle/available:
+    get:
+      tags: [Vehicle]
+      summary: List available vehicles
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Available vehicles list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vehicles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        plateNumber:
+                          type: string
+                        driverName:
+                          type: string
+                        seats:
+                          type: integer
+                        luggageCapacity:
+                          type: integer
+                  pagination:
+                    type: object
+
+  /pricing/estimate:
+    get:
+      tags: [Pricing]
+      summary: Quick fare estimate
+      description: Returns an instant fare estimate without DB-driven demand multiplier.
+      parameters:
+        - name: destLat
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+        - name: destLng
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+        - name: isPooled
+          in: query
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Fare estimate
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estimatedPrice:
+                    type: number
+                  distanceKm:
+                    type: number
+                  isPooled:
+                    type: boolean
+
+  /health:
+    get:
+      tags: [System]
+      summary: Health check
+      responses:
+        '200':
+          description: All services healthy
+        '503':
+          description: One or more services degraded
+
+  /queue/health:
+    get:
+      tags: [System]
+      summary: Queue metrics
+      responses:
+        '200':
+          description: Queue health info

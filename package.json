@@ -1,0 +1,45 @@
+{
+  "name": "airport-ride-pooling",
+  "version": "1.0.0",
+  "description": "Smart Airport Ride Pooling Backend — intelligently pools passengers into shared cabs with route optimization, detour limits, luggage capacity, concurrency safety, and dynamic pricing.",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "db:generate": "npx prisma generate",
+    "db:push": "npx prisma db push",
+    "db:migrate": "npx prisma migrate dev --name init",
+    "db:seed": "node prisma/seed.js",
+    "db:studio": "npx prisma studio",
+    "db:setup": "npx prisma generate && npx prisma db push && node prisma/seed.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.5.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "morgan": "^1.10.0",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^11.1.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "prisma": "^6.5.0"
+  },
+  "keywords": [
+    "airport",
+    "ride-pooling",
+    "shared-cab",
+    "nodejs",
+    "express",
+    "prisma"
+  ],
+  "author": "Airport Ride Pooling Team",
+  "license": "MIT"
+}
