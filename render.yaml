@@ -1,0 +1,37 @@
+# ─────────────────────────────────────────────
+# Render Blueprint — Backend Deployment
+# ─────────────────────────────────────────────
+# Deploy guide:
+#   1. Go to https://render.com/
+#   2. Create a new Web Service → connect your GitHub repo
+#   3. Set Root Directory to: backend
+#   4. Build Command: npm install && npx prisma generate && npx prisma db push && node prisma/seed.js
+#   5. Start Command: node src/index.js
+#   6. Add environment variables (see below)
+
+services:
+  - type: web
+    name: airport-ride-pooling-api
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate && npx prisma db push && node prisma/seed.js
+    startCommand: node src/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: DATABASE_URL
+        sync: false  # Set manually in Render dashboard
+      - key: BASE_FARE
+        value: 50
+      - key: DISTANCE_RATE
+        value: 12
+
+databases:
+  - name: airport-pooling-db
+    plan: free
+    databaseName: airport_pooling
+    user: airport_user
