@@ -1,0 +1,137 @@
+// ─────────────────────────────────────────────
+// Prisma Schema — Smart Airport Ride Pooling
+// ─────────────────────────────────────────────
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── Passengers ────────────────────────────────
+model Passenger {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  phone     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  rideRequests RideRequest[]
+
+  @@map("passengers")
+}
+
+// ── Vehicles ──────────────────────────────────
+enum VehicleStatus {
+  AVAILABLE
+  ASSIGNED
+  OFF_DUTY
+}
+
+model Vehicle {
+  id              String        @id @default(uuid())
+  plateNumber     String        @unique @map("plate_number")
+  driverName      String        @map("driver_name")
+  seats           Int           @default(4)
+  luggageCapacity Int           @default(4) @map("luggage_capacity")
+  status          VehicleStatus @default(AVAILABLE)
+  currentLat      Float         @default(12.9941) @map("current_lat") // Airport lat
+  currentLng      Float         @default(80.1709) @map("current_lng") // Airport lng
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  ridePools RidePool[]
+
+  @@index([status])
+  @@map("vehicles")
+}
+
+// ── Ride Pools ────────────────────────────────
+enum PoolStatus {
+  OPEN
+  FULL
+  IN_TRANSIT
+  COMPLETED
+  CANCELLED
+}
+
+model RidePool {
+  id        String     @id @default(uuid())
+  vehicleId String     @map("vehicle_id")
+  status    PoolStatus @default(OPEN)
+  version   Int        @default(1) // Optimistic locking
+  routeCost Float      @default(0) @map("route_cost")
+  currentPassengers Int @default(0) @map("current_passengers")
+  currentLuggage    Int @default(0) @map("current_luggage")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  vehicle       Vehicle         @relation(fields: [vehicleId], references: [id])
+  rideRequests  RideRequest[]
+  poolPassengers PoolPassenger[]
+
+  @@index([status])
+  @@index([vehicleId])
+  @@map("ride_pools")
+}
+
+// ── Ride Direction ─────────────────────────────
+enum RideDirection {
+  FROM_AIRPORT
+  TO_AIRPORT
+}
+
+// ── Ride Requests ─────────────────────────────
+enum RequestStatus {
+  PENDING
+  MATCHED
+  CANCELLED
+  COMPLETED
+}
+
+model RideRequest {
+  id             String        @id @default(uuid())
+  passengerId    String        @map("passenger_id")
+  poolId         String?       @map("pool_id")
+  originLat      Float         @default(12.9941) @map("origin_lat")
+  originLng      Float         @default(80.1709) @map("origin_lng")
+  destLat        Float         @map("dest_lat")
+  destLng        Float         @map("dest_lng")
+  destAddress    String        @map("dest_address")
+  direction      RideDirection @default(FROM_AIRPORT)
+  luggageCount   Int           @default(1) @map("luggage_count")
+  maxDetourRatio Float         @default(1.4) @map("max_detour_ratio")
+  status         RequestStatus @default(PENDING)
+  price          Float?
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+
+  passenger     Passenger      @relation(fields: [passengerId], references: [id])
+  pool          RidePool?      @relation(fields: [poolId], references: [id])
+  poolPassenger PoolPassenger?
+
+  @@index([status])
+  @@index([poolId])
+  @@index([passengerId])
+  @@map("ride_requests")
+}
+
+// ── Pool Passengers (join table) ──────────────
+model PoolPassenger {
+  id            String   @id @default(uuid())
+  poolId        String   @map("pool_id")
+  rideRequestId String   @unique @map("ride_request_id")
+  pickupOrder   Int      @map("pickup_order")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  pool        RidePool    @relation(fields: [poolId], references: [id])
+  rideRequest RideRequest @relation(fields: [rideRequestId], references: [id])
+
+  @@unique([poolId, rideRequestId])
+  @@index([poolId])
+  @@map("pool_passengers")
+}
