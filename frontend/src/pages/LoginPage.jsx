@@ -87,7 +87,7 @@ export default function LoginPage() {
             {/* Background glows */}
             <div style={{
                 position: 'absolute', top: '-20%', left: '-10%', width: '500px', height: '500px',
-                borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%)',
+                borderRadius: '50%', background: 'radial-gradient(circle, rgba(8, 145, 178, 0.08) 0%, transparent 70%)',
                 pointerEvents: 'none',
             }} />
             <div style={{
@@ -102,8 +102,8 @@ export default function LoginPage() {
                     <div style={{
                         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                         width: '64px', height: '64px', borderRadius: '18px',
-                        background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-                        boxShadow: '0 8px 30px rgba(99, 102, 241, 0.3)', marginBottom: '1.25rem',
+                        background: 'linear-gradient(135deg, #0891b2, #0e7490)',
+                        boxShadow: '0 8px 30px rgba(8, 145, 178, 0.3)', marginBottom: '1.25rem',
                     }}>
                         <Plane size={28} color="white" />
                     </div>
@@ -132,8 +132,8 @@ export default function LoginPage() {
                             style={{
                                 flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 gap: '0.4rem', padding: '0.6rem',
-                                background: mode === 'login' ? 'rgba(99, 102, 241, 0.12)' : 'transparent',
-                                border: mode === 'login' ? '1px solid rgba(99, 102, 241, 0.2)' : '1px solid transparent',
+                                background: mode === 'login' ? 'rgba(8, 145, 178, 0.12)' : 'transparent',
+                                border: mode === 'login' ? '1px solid rgba(8, 145, 178, 0.2)' : '1px solid transparent',
                                 borderRadius: '10px', cursor: 'pointer',
                                 color: mode === 'login' ? 'var(--color-primary-light)' : 'var(--color-text-dim)',
                                 fontWeight: 600, fontSize: '0.85rem', transition: 'all 0.2s',
@@ -149,7 +149,7 @@ export default function LoginPage() {
                                 background: mode === 'register' ? 'rgba(6, 214, 160, 0.12)' : 'transparent',
                                 border: mode === 'register' ? '1px solid rgba(6, 214, 160, 0.2)' : '1px solid transparent',
                                 borderRadius: '10px', cursor: 'pointer',
-                                color: mode === 'register' ? '#06d6a0' : 'var(--color-text-dim)',
+                                color: mode === 'register' ? '#f59e0b' : 'var(--color-text-dim)',
                                 fontWeight: 600, fontSize: '0.85rem', transition: 'all 0.2s',
                             }}
                         >
@@ -210,7 +210,7 @@ export default function LoginPage() {
                             {error && <ErrorMsg msg={error} />}
                             {success && <SuccessMsg msg={success} />}
 
-                            <SubmitBtn loading={loading} text="Create Account" icon={<UserPlus size={16} />} color="#06d6a0" />
+                            <SubmitBtn loading={loading} text="Create Account" icon={<UserPlus size={16} />} color="#f59e0b" />
                         </form>
                     )}
 
@@ -241,15 +241,15 @@ export default function LoginPage() {
                                             style={{
                                                 display: 'flex', alignItems: 'center', gap: '0.45rem',
                                                 padding: '0.5rem 0.65rem',
-                                                background: email === q.email ? 'rgba(99, 102, 241, 0.1)' : 'rgba(255, 255, 255, 0.02)',
-                                                border: `1px solid ${email === q.email ? 'rgba(99, 102, 241, 0.3)' : 'var(--color-border)'}`,
+                                                background: email === q.email ? 'rgba(8, 145, 178, 0.1)' : 'rgba(255, 255, 255, 0.02)',
+                                                border: `1px solid ${email === q.email ? 'rgba(8, 145, 178, 0.3)' : 'var(--color-border)'}`,
                                                 borderRadius: '10px', color: 'var(--color-text)',
                                                 cursor: 'pointer', transition: 'all 0.15s', fontSize: '0.78rem', fontWeight: 500,
                                             }}
                                         >
                                             <div style={{
                                                 width: '26px', height: '26px', borderRadius: '50%',
-                                                background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+                                                background: 'linear-gradient(135deg, #0891b2, #0e7490)',
                                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                                                 color: 'white', fontSize: '0.62rem', fontWeight: 700, flexShrink: 0,
                                             }}>
@@ -344,14 +344,14 @@ function SuccessMsg({ msg }) {
             display: 'flex', alignItems: 'center', gap: '0.45rem',
             padding: '0.55rem 0.75rem', background: 'rgba(6, 214, 160, 0.08)',
             border: '1px solid rgba(6, 214, 160, 0.2)', borderRadius: '10px',
-            color: '#06d6a0', fontSize: '0.82rem', marginBottom: '0.9rem',
+            color: '#f59e0b', fontSize: '0.82rem', marginBottom: '0.9rem',
         }}>
             <CheckCircle size={13} /> {msg}
         </div>
     );
 }
 
-function SubmitBtn({ loading, text, icon, color = '#6366f1' }) {
+function SubmitBtn({ loading, text, icon, color = '#0891b2' }) {
     return (
         <button
             type="submit"

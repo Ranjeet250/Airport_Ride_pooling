@@ -26,8 +26,8 @@ const createIcon = (color, emoji) => L.divIcon({
     popupAnchor: [0, -50],
 });
 
-const airportIcon = createIcon('#6366f1', '✈️');
-const destinationIcon = createIcon('#06d6a0', '📍');
+const airportIcon = createIcon('#0891b2', '✈️');
+const destinationIcon = createIcon('#f59e0b', '📍');
 
 // ── Map helpers ───────────────────────────────
 function MapClickHandler({ onMapClick }) {
@@ -232,7 +232,7 @@ export default function RideRequestForm() {
                 {routeLine && (
                     <Polyline
                         positions={routeLine}
-                        pathOptions={{ color: '#6366f1', weight: 3, dashArray: '10, 8', opacity: 0.8 }}
+                        pathOptions={{ color: '#0891b2', weight: 3, dashArray: '10, 8', opacity: 0.8 }}
                     />
                 )}
             </MapContainer>
@@ -244,7 +244,7 @@ export default function RideRequestForm() {
             }}>
                 <div style={{
                     background: 'rgba(10, 14, 26, 0.94)', backdropFilter: 'blur(20px)',
-                    borderRadius: '18px', border: '1px solid rgba(99, 102, 241, 0.15)',
+                    borderRadius: '18px', border: '1px solid rgba(8, 145, 178, 0.15)',
                     boxShadow: '0 4px 30px rgba(0, 0, 0, 0.5)', padding: '0.75rem',
                 }}>
                     {/* User bar */}
@@ -256,7 +256,7 @@ export default function RideRequestForm() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <div style={{
                                 width: '26px', height: '26px', borderRadius: '50%',
-                                background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+                                background: 'linear-gradient(135deg, #0891b2, #0e7490)',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 color: 'white', fontSize: '0.6rem', fontWeight: 700,
                             }}>
@@ -293,7 +293,7 @@ export default function RideRequestForm() {
                         >
                             <div style={{
                                 width: '12px', height: '12px', borderRadius: '50%',
-                                background: '#6366f1', border: '2px solid rgba(99, 102, 241, 0.3)', flexShrink: 0,
+                                background: '#0891b2', border: '2px solid rgba(8, 145, 178, 0.3)', flexShrink: 0,
                             }} />
                             <div style={{ flex: 1 }}>
                                 <div style={{ fontSize: '0.6rem', color: 'var(--color-text-dim)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{direction === 'FROM_AIRPORT' ? 'FROM' : 'TO'}</div>
@@ -308,7 +308,7 @@ export default function RideRequestForm() {
                             <div style={{
                                 position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '0.25rem',
                                 background: 'rgba(10, 14, 26, 0.97)', borderRadius: '12px',
-                                border: '1px solid rgba(99, 102, 241, 0.15)',
+                                border: '1px solid rgba(8, 145, 178, 0.15)',
                                 boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)',
                                 padding: '0.35rem', zIndex: 10, maxHeight: '220px', overflowY: 'auto',
                             }}>
@@ -319,16 +319,16 @@ export default function RideRequestForm() {
                                         style={{
                                             display: 'flex', alignItems: 'center', gap: '0.6rem',
                                             width: '100%', padding: '0.5rem 0.6rem',
-                                            background: selectedAirport.id === ap.id ? 'rgba(99, 102, 241, 0.1)' : 'transparent',
+                                            background: selectedAirport.id === ap.id ? 'rgba(8, 145, 178, 0.1)' : 'transparent',
                                             border: 'none', borderRadius: '8px', cursor: 'pointer',
                                             textAlign: 'left', color: 'var(--color-text)', transition: 'background 0.15s',
                                         }}
-                                        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(99, 102, 241, 0.07)'}
-                                        onMouseLeave={(e) => e.currentTarget.style.background = selectedAirport.id === ap.id ? 'rgba(99, 102, 241, 0.1)' : 'transparent'}
+                                        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(8, 145, 178, 0.07)'}
+                                        onMouseLeave={(e) => e.currentTarget.style.background = selectedAirport.id === ap.id ? 'rgba(8, 145, 178, 0.1)' : 'transparent'}
                                     >
                                         <div style={{
                                             width: '32px', height: '32px', borderRadius: '8px',
-                                            background: selectedAirport.id === ap.id ? 'rgba(99, 102, 241, 0.15)' : 'rgba(255,255,255,0.03)',
+                                            background: selectedAirport.id === ap.id ? 'rgba(8, 145, 178, 0.15)' : 'rgba(255,255,255,0.03)',
                                             display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem', flexShrink: 0,
                                         }}>✈️</div>
                                         <div style={{ flex: 1, minWidth: 0 }}>
@@ -341,7 +341,7 @@ export default function RideRequestForm() {
                                             </div>
                                         </div>
                                         {selectedAirport.id === ap.id && (
-                                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#06d6a0', flexShrink: 0 }} />
+                                            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f59e0b', flexShrink: 0 }} />
                                         )}
                                     </button>
                                 ))}
@@ -362,12 +362,12 @@ export default function RideRequestForm() {
                             style={{
                                 display: 'flex', alignItems: 'center', gap: '0.35rem',
                                 padding: '0.3rem 0.7rem', borderRadius: '20px',
-                                background: 'rgba(99, 102, 241, 0.1)', border: '1px solid rgba(99, 102, 241, 0.2)',
-                                color: '#818cf8', cursor: 'pointer', fontSize: '0.65rem', fontWeight: 600,
+                                background: 'rgba(8, 145, 178, 0.1)', border: '1px solid rgba(8, 145, 178, 0.2)',
+                                color: '#22d3ee', cursor: 'pointer', fontSize: '0.65rem', fontWeight: 600,
                                 transition: 'all 0.2s',
                             }}
-                            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(99, 102, 241, 0.18)'; }}
-                            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(99, 102, 241, 0.1)'; }}
+                            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(8, 145, 178, 0.18)'; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(8, 145, 178, 0.1)'; }}
                             title="Swap direction"
                         >
                             <ArrowDownUp size={12} />
@@ -381,7 +381,7 @@ export default function RideRequestForm() {
                         padding: '0.45rem 0.5rem', background: 'rgba(255,255,255,0.03)',
                         borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)',
                     }}>
-                        <div style={{ width: '12px', height: '12px', borderRadius: '3px', background: '#06d6a0', flexShrink: 0 }} />
+                        <div style={{ width: '12px', height: '12px', borderRadius: '3px', background: '#f59e0b', flexShrink: 0 }} />
                         <div style={{ flex: 1 }}>
                             <div style={{ fontSize: '0.6rem', color: 'var(--color-text-dim)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{direction === 'FROM_AIRPORT' ? 'TO' : 'FROM'}</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
@@ -415,7 +415,7 @@ export default function RideRequestForm() {
                     <div style={{
                         marginTop: '0.5rem', background: 'rgba(10, 14, 26, 0.96)',
                         backdropFilter: 'blur(20px)', borderRadius: '16px',
-                        border: '1px solid rgba(99, 102, 241, 0.12)',
+                        border: '1px solid rgba(8, 145, 178, 0.12)',
                         boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)',
                         maxHeight: '260px', overflowY: 'auto', padding: '0.4rem',
                     }}>
@@ -437,19 +437,19 @@ export default function RideRequestForm() {
                                 style={{
                                     display: 'flex', alignItems: 'center', gap: '0.6rem',
                                     width: '100%', padding: '0.5rem 0.6rem',
-                                    background: destination?.fullAddress === dest.fullAddress ? 'rgba(99, 102, 241, 0.1)' : 'transparent',
+                                    background: destination?.fullAddress === dest.fullAddress ? 'rgba(8, 145, 178, 0.1)' : 'transparent',
                                     border: 'none', borderRadius: '10px', cursor: 'pointer',
                                     transition: 'background 0.15s', textAlign: 'left', color: 'var(--color-text)',
                                 }}
-                                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(99, 102, 241, 0.07)'}
+                                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(8, 145, 178, 0.07)'}
                                 onMouseLeave={(e) => e.currentTarget.style.background =
-                                    destination?.fullAddress === dest.fullAddress ? 'rgba(99, 102, 241, 0.1)' : 'transparent'}
+                                    destination?.fullAddress === dest.fullAddress ? 'rgba(8, 145, 178, 0.1)' : 'transparent'}
                             >
                                 <div style={{
                                     width: '28px', height: '28px', borderRadius: '8px',
                                     background: 'rgba(6, 214, 160, 0.08)',
                                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    color: '#06d6a0', flexShrink: 0,
+                                    color: '#f59e0b', flexShrink: 0,
                                 }}>
                                     <MapPin size={13} />
                                 </div>
@@ -475,7 +475,7 @@ export default function RideRequestForm() {
                 position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 1000,
                 background: 'rgba(10, 14, 26, 0.96)', backdropFilter: 'blur(24px)',
                 borderRadius: '24px 24px 0 0',
-                border: '1px solid rgba(99, 102, 241, 0.12)', borderBottom: 'none',
+                border: '1px solid rgba(8, 145, 178, 0.12)', borderBottom: 'none',
                 boxShadow: '0 -8px 40px rgba(0, 0, 0, 0.5)',
                 transition: 'max-height 0.3s ease',
                 maxHeight: panelExpanded ? '400px' : '130px', overflow: 'hidden',
@@ -510,14 +510,14 @@ export default function RideRequestForm() {
                         <div style={{
                             display: 'flex', gap: '0.7rem', alignItems: 'center',
                             marginBottom: '0.8rem', padding: '0.65rem',
-                            background: 'rgba(99, 102, 241, 0.05)', borderRadius: '14px',
-                            border: '1px solid rgba(99, 102, 241, 0.1)',
+                            background: 'rgba(8, 145, 178, 0.05)', borderRadius: '14px',
+                            border: '1px solid rgba(8, 145, 178, 0.1)',
                         }}>
                             <div style={{
                                 width: '36px', height: '36px', borderRadius: '12px',
-                                background: '#06d6a010', border: '1px solid #06d6a020',
+                                background: '#f59e0b10', border: '1px solid #f59e0b20',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                color: '#06d6a0', flexShrink: 0,
+                                color: '#f59e0b', flexShrink: 0,
                             }}>
                                 <Navigation size={15} />
                             </div>
@@ -533,7 +533,7 @@ export default function RideRequestForm() {
                                 <Loader2 size={15} style={{ animation: 'spin 1s linear infinite', color: 'var(--color-primary)' }} />
                             ) : fareEstimate ? (
                                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                                    <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#06d6a0' }}>
+                                    <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f59e0b' }}>
                                         ₹{fareEstimate.pooledFare || fareEstimate.estimatedFare || '—'}
                                     </div>
                                     <div style={{ fontSize: '0.58rem', color: 'var(--color-text-dim)', fontWeight: 500 }}>pooled fare</div>
@@ -562,7 +562,7 @@ export default function RideRequestForm() {
                                     </label>
                                     <input type="range" min="0" max="5" value={luggageCount}
                                         onChange={(e) => setLuggageCount(Number(e.target.value))}
-                                        style={{ width: '100%', accentColor: '#6366f1' }} />
+                                        style={{ width: '100%', accentColor: '#0891b2' }} />
                                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.58rem', color: 'var(--color-text-dim)' }}>
                                         <span>None</span><span>5</span>
                                     </div>
@@ -576,7 +576,7 @@ export default function RideRequestForm() {
                                     </label>
                                     <input type="range" min="1.0" max="2.5" step="0.1" value={maxDetourRatio}
                                         onChange={(e) => setMaxDetourRatio(Number(e.target.value))}
-                                        style={{ width: '100%', accentColor: '#6366f1' }} />
+                                        style={{ width: '100%', accentColor: '#0891b2' }} />
                                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.58rem', color: 'var(--color-text-dim)' }}>
                                         <span>Direct</span><span>Flexible</span>
                                     </div>
@@ -587,13 +587,13 @@ export default function RideRequestForm() {
                                 <div style={{ display: 'flex', gap: '0.35rem', marginBottom: '0.8rem' }}>
                                     <div style={{ flex: 1, padding: '0.5rem', borderRadius: '10px', background: 'rgba(6, 214, 160, 0.06)', border: '1px solid rgba(6, 214, 160, 0.15)', textAlign: 'center' }}>
                                         <div style={{ fontSize: '0.58rem', color: 'var(--color-text-dim)', fontWeight: 600 }}>POOLED</div>
-                                        <div style={{ fontSize: '1rem', fontWeight: 800, color: '#06d6a0' }}>₹{fareEstimate.pooledFare || fareEstimate.estimatedFare || '—'}</div>
+                                        <div style={{ fontSize: '1rem', fontWeight: 800, color: '#f59e0b' }}>₹{fareEstimate.pooledFare || fareEstimate.estimatedFare || '—'}</div>
                                     </div>
                                     <div style={{ flex: 1, padding: '0.5rem', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', textAlign: 'center' }}>
                                         <div style={{ fontSize: '0.58rem', color: 'var(--color-text-dim)', fontWeight: 600 }}>SOLO</div>
                                         <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--color-text-muted)', textDecoration: 'line-through' }}>₹{fareEstimate.soloFare || fareEstimate.baseFare || '—'}</div>
                                     </div>
-                                    <div style={{ flex: 1, padding: '0.5rem', borderRadius: '10px', background: 'rgba(99, 102, 241, 0.06)', border: '1px solid rgba(99, 102, 241, 0.12)', textAlign: 'center' }}>
+                                    <div style={{ flex: 1, padding: '0.5rem', borderRadius: '10px', background: 'rgba(8, 145, 178, 0.06)', border: '1px solid rgba(8, 145, 178, 0.12)', textAlign: 'center' }}>
                                         <div style={{ fontSize: '0.58rem', color: 'var(--color-text-dim)', fontWeight: 600 }}>DISTANCE</div>
                                         <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--color-primary-light)' }}>{fareEstimate.distanceKm?.toFixed(1) || '—'} km</div>
                                     </div>
@@ -631,12 +631,12 @@ export default function RideRequestForm() {
         .leaflet-container { background: #0a0e1a !important; font-family: 'Inter', sans-serif; }
         .leaflet-popup-content-wrapper {
           background: rgba(17, 24, 39, 0.95); color: white;
-          border-radius: 12px; border: 1px solid rgba(99, 102, 241, 0.2);
+          border-radius: 12px; border: 1px solid rgba(8, 145, 178, 0.2);
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
         .leaflet-popup-tip { background: rgba(17, 24, 39, 0.95); }
         .leaflet-control-attribution { background: rgba(10, 14, 26, 0.8) !important; color: #64748b !important; font-size: 0.6rem !important; }
-        .leaflet-control-attribution a { color: #818cf8 !important; }
+        .leaflet-control-attribution a { color: #22d3ee !important; }
       `}</style>
         </div>
     );

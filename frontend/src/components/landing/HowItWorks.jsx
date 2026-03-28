@@ -6,13 +6,13 @@ export default function HowItWorks() {
             icon: <ArrowDownRight size={28} />,
             title: 'Request a Ride',
             desc: 'Enter your destination, luggage count, and detour tolerance from the airport.',
-            color: '#6366f1',
+            color: '#0891b2',
         },
         {
             icon: <Users size={28} />,
             title: 'Get Matched',
             desc: 'Our algorithm finds passengers heading nearby and pools you together in seconds.',
-            color: '#06d6a0',
+            color: '#f59e0b',
         },
         {
             icon: <Route size={28} />,

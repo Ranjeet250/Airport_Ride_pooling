@@ -5,9 +5,9 @@ import { Loader2, CheckCircle2, XCircle, Clock, Users, AlertTriangle } from 'luc
 
 const STATUS_CONFIG = {
     PENDING: { icon: <Clock size={20} />, badge: 'badge-pending', label: 'Pending Match', color: '#fbbf24' },
-    MATCHED: { icon: <CheckCircle2 size={20} />, badge: 'badge-matched', label: 'Matched!', color: '#06d6a0' },
-    IN_TRANSIT: { icon: <Users size={20} />, badge: 'badge-matched', label: 'In Transit', color: '#06d6a0' },
-    COMPLETED: { icon: <CheckCircle2 size={20} />, badge: 'badge-completed', label: 'Completed', color: '#818cf8' },
+    MATCHED: { icon: <CheckCircle2 size={20} />, badge: 'badge-matched', label: 'Matched!', color: '#f59e0b' },
+    IN_TRANSIT: { icon: <Users size={20} />, badge: 'badge-matched', label: 'In Transit', color: '#f59e0b' },
+    COMPLETED: { icon: <CheckCircle2 size={20} />, badge: 'badge-completed', label: 'Completed', color: '#22d3ee' },
     CANCELLED: { icon: <XCircle size={20} />, badge: 'badge-cancelled', label: 'Cancelled', color: '#f87171' },
 };
 

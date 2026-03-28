@@ -33,10 +33,10 @@ function AnimatedCounter({ target, suffix = '', duration = 2000 }) {
 
 export default function StatsSection() {
     const stats = [
-        { icon: <Users size={24} />, value: 1500, suffix: '+', label: 'Passengers Served', color: '#6366f1' },
-        { icon: <TrendingUp size={24} />, value: 25, suffix: '%', label: 'Average Savings', color: '#06d6a0' },
+        { icon: <Users size={24} />, value: 1500, suffix: '+', label: 'Passengers Served', color: '#0891b2' },
+        { icon: <TrendingUp size={24} />, value: 25, suffix: '%', label: 'Average Savings', color: '#f59e0b' },
         { icon: <Car size={24} />, value: 10, suffix: '', label: 'Vehicles Fleet', color: '#f59e0b' },
-        { icon: <MapPin size={24} />, value: 50, suffix: '+', label: 'Destinations Covered', color: '#8b5cf6' },
+        { icon: <MapPin size={24} />, value: 50, suffix: '+', label: 'Destinations Covered', color: '#0e7490' },
     ];
 
     return (

@@ -6,13 +6,13 @@ export default function FeaturesSection() {
             icon: <Brain size={24} />,
             title: 'Smart Matching',
             desc: 'Greedy spatial clustering algorithm groups passengers heading in similar directions.',
-            color: '#6366f1',
+            color: '#0891b2',
         },
         {
             icon: <DollarSign size={24} />,
             title: 'Dynamic Pricing',
             desc: 'Real-time fare based on demand, distance, pool discounts, and detour penalties.',
-            color: '#06d6a0',
+            color: '#f59e0b',
         },
         {
             icon: <Shield size={24} />,
@@ -30,7 +30,7 @@ export default function FeaturesSection() {
             icon: <MapPin size={24} />,
             title: 'Route Optimization',
             desc: 'Brute-force permutation finds optimal drop-off order for up to 4 passengers.',
-            color: '#8b5cf6',
+            color: '#0e7490',
         },
         {
             icon: <Clock size={24} />,

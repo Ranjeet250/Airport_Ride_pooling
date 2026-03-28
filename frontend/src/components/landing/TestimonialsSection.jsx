@@ -46,7 +46,7 @@ export default function TestimonialsSection() {
                                 position: 'absolute',
                                 top: '1rem',
                                 right: '1.25rem',
-                                color: 'rgba(99, 102, 241, 0.1)',
+                                color: 'rgba(8, 145, 178, 0.1)',
                             }}
                         />
 

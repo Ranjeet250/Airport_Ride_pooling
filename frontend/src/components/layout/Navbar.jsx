@@ -44,7 +44,7 @@ export default function Navbar() {
                     width: '34px',
                     height: '34px',
                     borderRadius: '10px',
-                    background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+                    background: 'linear-gradient(135deg, #0891b2, #0e7490)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -54,7 +54,7 @@ export default function Navbar() {
                 <span style={{
                     fontSize: '1.1rem',
                     fontWeight: 800,
-                    background: 'linear-gradient(135deg, #6366f1, #06d6a0)',
+                    background: 'linear-gradient(135deg, #0891b2, #f59e0b)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                 }}>
@@ -79,7 +79,7 @@ export default function Navbar() {
                                 ? 'var(--color-primary-light)'
                                 : 'var(--color-text-muted)',
                             background: location.pathname === link.to
-                                ? 'rgba(99, 102, 241, 0.1)'
+                                ? 'rgba(8, 145, 178, 0.1)'
                                 : 'transparent',
                             textDecoration: 'none',
                             fontSize: '0.88rem',
@@ -110,7 +110,7 @@ export default function Navbar() {
                                 width: '30px',
                                 height: '30px',
                                 borderRadius: '50%',
-                                background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+                                background: 'linear-gradient(135deg, #0891b2, #0e7490)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
@@ -212,7 +212,7 @@ export default function Navbar() {
                                     ? 'var(--color-primary-light)'
                                     : 'var(--color-text-muted)',
                                 background: location.pathname === link.to
-                                    ? 'rgba(99, 102, 241, 0.1)'
+                                    ? 'rgba(8, 145, 178, 0.1)'
                                     : 'transparent',
                                 textDecoration: 'none',
                                 fontSize: '0.9rem',
